@@ -1,9 +1,13 @@
+import 'dart:async';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:medicine/Signup.dart';
 import 'package:medicine/auth_view_model.dart';
 import 'package:medicine/snackbar.dart';
 import 'package:provider/provider.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 
 class Start extends StatefulWidget {
   static const String routeName = '/start';
@@ -16,6 +20,20 @@ class Start extends StatefulWidget {
 class _StartState extends State<Start> {
   String _emailError = '';
   String _passwordError = '';
+  late StreamSubscription subscription;
+  bool isDeviceConnected = false;
+  bool isAlertSet = false;
+
+  getConnectivity() =>
+      subscription = Connectivity().onConnectivityChanged.listen(
+        (ConnectivityResult result) async {
+          isDeviceConnected = await InternetConnectionChecker().hasConnection;
+          if (!isDeviceConnected && isAlertSet == false) {
+            showDialogBox();
+            setState(() => isAlertSet = true);
+          }
+        },
+      );
 
   @override
   void initState() {
@@ -23,35 +41,6 @@ class _StartState extends State<Start> {
     final authVM = Provider.of<AuthViewModel>(context, listen: false);
     authVM.emailText.clear();
     authVM.passwordText.clear();
-    _checkInternetConnection();
-  }
-
-  Future<void> _checkInternetConnection() async {
-    bool isConnected = await InternetConnectionChecker().hasConnection;
-    if (!isConnected) {
-      _showInternetAlertDialog(context);
-    }
-  }
-
-  void _showInternetAlertDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('No Internet Connection'),
-          content: Text('Please check your internet connection and try again.'),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text('OK'),
-            ),
-          ],
-        );
-      },
-    );
   }
 
   bool _isEmailValid(String email) {
@@ -410,5 +399,110 @@ class _StartState extends State<Start> {
         ),
       ),
     );
+  }
+
+  showDialogBox() {
+    return (BuildContext context) {
+      return Scaffold(
+        body: SizedBox(
+          width: MediaQuery.of(context).size.width,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 16.0),
+                child: SizedBox(
+                  child: Container(
+                    padding: EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.0),
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.2),
+                          blurRadius: 5,
+                          offset: Offset(0, 3),
+                        ),
+                      ],
+                    ),
+                    child: AlertDialog(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25.0),
+                      ),
+                      title: Center(
+                        child: Text(
+                          'Your device is not connected',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                            fontSize: 22,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      content: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Image.asset('images/signalr.png'),
+                          SizedBox(height: 10),
+                          Text(
+                            'Connect your device with',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      ),
+                      actions: <Widget>[
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Container(
+                              width: 110,
+                              height: 50,
+                              decoration: BoxDecoration(
+                                color: Color(0xFF665CF5),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              child: IconButton(
+                                icon:
+                                    Icon(Icons.bluetooth, color: Colors.white),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                  // Add your onPressed code here
+                                },
+                              ),
+                            ),
+                            Container(
+                              width: 110,
+                              height: 50,
+                              decoration: BoxDecoration(
+                                color: Color(0xFF665CF5),
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              child: IconButton(
+                                icon: Icon(Icons.wifi, color: Colors.white),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                  // Add your onPressed code here
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    };
   }
 }

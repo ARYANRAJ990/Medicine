@@ -25,13 +25,14 @@ dependencies:
   js: ^0.6.7
   get: ^4.6.6
   internet_connection_checker: ^1.0.0+1
-  internet_connection_checker_plus: ^2.3.0
+  # internet_connection_checker_plus: ^2.3.0
   fluttertoast: ^8.2.4
   google_sign_in: ^6.2.1
   firebase_database: ^10.5.7
   uiblock: ^2.0.3
   shared_preferences: ^2.2.3
   provider: ^6.1.2
+  connectivity_plus: ^3.0.6
 
 
 
