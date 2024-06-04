@@ -9,7 +9,6 @@ import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:get/get.dart';
 
-
 class Start extends StatefulWidget {
   static const String routeName = '/start';
   const Start({Key? key}) : super(key: key);
@@ -24,7 +23,6 @@ class _StartState extends State<Start> {
   late StreamSubscription subscription;
   bool isDeviceConnected = false;
   bool isAlertSet = false;
-
 
   getConnectivity() =>
       subscription = Connectivity().onConnectivityChanged.listen(
@@ -354,19 +352,26 @@ class _StartState extends State<Start> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Image.asset(
-                          'images/googler.png', // Make sure to add your Google logo image in the assets folder
+                          'images/icon.png', // Make sure to add your Google logo image in the assets folder
                           height: 24.0, // Adjust the height as needed
                         ),
-                        SizedBox(width: 8.0), // Adjust the space between the image and text
-                        Text('Continue with Google',style: TextStyle(color: Colors.white,fontSize: 18,
-                          fontWeight: FontWeight.w600,),),
+                        SizedBox(
+                            width:
+                                8.0), // Adjust the space between the image and text
+                        Text(
+                          'Continue with Google',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
                       ],
                     ),
                   ),
                 ),
               ),
               SizedBox(height: 20),
-
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
