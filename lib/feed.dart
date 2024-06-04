@@ -7,6 +7,7 @@ import 'package:scroll_snap_list/scroll_snap_list.dart';
 import 'package:curved_labeled_navigation_bar/curved_navigation_bar.dart';
 import 'package:curved_labeled_navigation_bar/curved_navigation_bar_item.dart';
 import 'Controller.dart';
+import '';
 
 class Add extends StatefulWidget {
   const Add({Key? key}) : super(key: key);
