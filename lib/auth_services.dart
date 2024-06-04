@@ -25,14 +25,17 @@ class AuthService {
     );
 
     try {
+      log('got to try');
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password)
           .then((value) async {
+        log('after try go to sign in');
         print(value.user!.uid);
         // await UserService().checkUser().then((value) {
         //   UIBlock.unblock(context);
         //   if (value) {
-        Constants.prefs.setBool(AppStrings.isLoggedIn, true);
+        // Constants.prefs.setBool(AppStrings.isLoggedIn, true);
+        log('after check user');
         PageNavigator(ctx: context).nextPageOnly(page: const Add());
         // } else {
         //   showSnackBar(context: context, message: 'User not registered');

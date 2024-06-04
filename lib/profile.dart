@@ -1,6 +1,8 @@
-
-
 import 'package:flutter/material.dart';
+import 'package:medicine/constant.dart';
+import 'package:medicine/start.dart';
+import 'package:medicine/string.dart';
+
 class Account extends StatelessWidget {
   const Account({super.key});
 
@@ -20,15 +22,15 @@ class Account extends StatelessWidget {
               padding: const EdgeInsets.only(top: 10.0, left: 25),
               child: Row(
                 children: [
-                  imageProfile(context ),
-                // ClipOval(
-                //   child: Image.asset(
-                //     'images/dp.jpg',
-                //     fit: BoxFit.cover,
-                //     width: 100,
-                //     height: 100,
-                //   ),
-                // ),
+                  imageProfile(context),
+                  // ClipOval(
+                  //   child: Image.asset(
+                  //     'images/dp.jpg',
+                  //     fit: BoxFit.cover,
+                  //     width: 100,
+                  //     height: 100,
+                  //   ),
+                  // ),
                   SizedBox(
                     width: 10,
                   ),
@@ -215,12 +217,19 @@ class Account extends StatelessWidget {
                         child: Column(
                           children: [
                             ListTile(
-                              leading: Icon(Icons.volume_down_outlined,color: Colors.grey,size: 35,),
+                              leading: Icon(
+                                Icons.volume_down_outlined,
+                                color: Colors.grey,
+                                size: 35,
+                              ),
                               titleAlignment: ListTileTitleAlignment.center,
-                              title:  Text(' Sound Options',style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 18),),
+                              title: Text(
+                                ' Sound Options',
+                                style: TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 18),
+                              ),
                               //tileColor: isSelected ? Colors.grey : null,
                               onTap: () {
                                 // Navigator.push(
@@ -228,7 +237,13 @@ class Account extends StatelessWidget {
                                 //  MaterialPageRoute(builder: (context) =>   setPrice()), // Assuming Feed is the widget you want to navigate to
                                 // );
                               },
-                              subtitle: Text('Vibrate,Silent',style: TextStyle(color: Colors.grey[400],fontSize: 15,fontWeight: FontWeight.normal),),
+                              subtitle: Text(
+                                'Vibrate,Silent',
+                                style: TextStyle(
+                                    color: Colors.grey[400],
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.normal),
+                              ),
                             ),
                           ],
                         ),
@@ -239,7 +254,7 @@ class Account extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(right: 240.0,top: 20),
+              padding: EdgeInsets.only(right: 240.0, top: 20),
               child: Text(
                 'Caretakers',
                 style: TextStyle(
@@ -276,7 +291,10 @@ class Account extends StatelessWidget {
                               height: 55,
                             ),
                           ),
-                          Text('Dipa Luna',style: TextStyle(color: Colors.grey,fontSize: 15),),
+                          Text(
+                            'Dipa Luna',
+                            style: TextStyle(color: Colors.grey, fontSize: 15),
+                          ),
                         ],
                       ),
                       Column(
@@ -290,7 +308,9 @@ class Account extends StatelessWidget {
                               height: 55,
                             ),
                           ),
-                          Text('Roza',style: TextStyle(color: Colors.grey,fontSize: 15)),
+                          Text('Roza',
+                              style:
+                                  TextStyle(color: Colors.grey, fontSize: 15)),
                         ],
                       ),
                       Column(
@@ -304,7 +324,9 @@ class Account extends StatelessWidget {
                               height: 55,
                             ),
                           ),
-                          Text('Lipsa',style: TextStyle(color: Colors.grey,fontSize: 15)),
+                          Text('Lipsa',
+                              style:
+                                  TextStyle(color: Colors.grey, fontSize: 15)),
                         ],
                       ),
                       Column(
@@ -319,7 +341,11 @@ class Account extends StatelessWidget {
                               onPressed: () {
                                 // Handle button press
                               },
-                              child: Icon(Icons.add,color: Colors.grey,size: 34,),
+                              child: Icon(
+                                Icons.add,
+                                color: Colors.grey,
+                                size: 34,
+                              ),
                             ),
                           ),
                           Text(
@@ -337,7 +363,7 @@ class Account extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(right: 267.0,top: 20),
+              padding: EdgeInsets.only(right: 267.0, top: 20),
               child: Text(
                 'Doctor',
                 style: TextStyle(
@@ -373,16 +399,19 @@ class Account extends StatelessWidget {
                               onPressed: () {
                                 // Handle button press
                               },
-                              child: Icon(Icons.add,color: Colors.white,size: 50,),
+                              child: Icon(
+                                Icons.add,
+                                color: Colors.white,
+                                size: 50,
+                              ),
                             ),
                           ),
                           Text(
                             'Add Your Doctors',
                             style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold
-                            ),
+                                color: Colors.black,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
                           ),
                           SizedBox(height: 3),
                           RichText(
@@ -391,7 +420,8 @@ class Account extends StatelessWidget {
                                 fontSize: 16.0,
 
                                 fontWeight: FontWeight.bold,
-                                color: Colors.black, // Default color for other text
+                                color: Colors
+                                    .black, // Default color for other text
                               ),
                               children: <TextSpan>[
                                 TextSpan(text: 'or use '),
@@ -400,7 +430,8 @@ class Account extends StatelessWidget {
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 16,
-                                    color: Color(0xFFffb84d), // Color for 'Invitle Link'
+                                    color: Color(
+                                        0xFFffb84d), // Color for 'Invitle Link'
                                   ),
                                 ),
                               ],
@@ -415,51 +446,87 @@ class Account extends StatelessWidget {
             ),
             SizedBox(height: 20),
             Padding(
-              padding:  EdgeInsets.only(right: 240.0),
-              child: TextButton(onPressed: (){}, child: Text('Privacy Policy',
-              style: TextStyle(color: Colors.black,fontSize: 18,fontWeight: FontWeight.bold),)),
+              padding: EdgeInsets.only(right: 240.0),
+              child: TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    'Privacy Policy',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold),
+                  )),
             ),
             SizedBox(height: 15),
             Padding(
-              padding:  EdgeInsets.only(right: 240.0),
-              child: TextButton(onPressed: (){}, child: Text('Terms of Use ',
-                style: TextStyle(color: Colors.black,fontSize: 18,fontWeight: FontWeight.bold),)),
+              padding: EdgeInsets.only(right: 240.0),
+              child: TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    'Terms of Use ',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold),
+                  )),
             ),
             SizedBox(height: 15),
             Padding(
-              padding:  EdgeInsets.only(right: 277.0),
-              child: TextButton(onPressed: (){}, child: Text('Rate Us ',
-                style: TextStyle(color: Colors.black,fontSize: 18,fontWeight: FontWeight.bold),)),
+              padding: EdgeInsets.only(right: 277.0),
+              child: TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    'Rate Us ',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold),
+                  )),
             ),
             SizedBox(height: 15),
             Padding(
-              padding:  EdgeInsets.only(right: 288.0),
-              child: TextButton(onPressed: (){}, child: Text('Share ',
-                style: TextStyle(color: Colors.black,fontSize: 18,fontWeight: FontWeight.bold),)),
+              padding: EdgeInsets.only(right: 288.0),
+              child: TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    'Share ',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold),
+                  )),
             ),
             Padding(
-              padding:  EdgeInsets.all(20.0),
+              padding: EdgeInsets.all(20.0),
               child: Center(
                 child: SizedBox(
                   height: 55,
                   width: 315,
                   child: ElevatedButton(
                     onPressed: () {
-                     // Navigator.push(context, MaterialPageRoute(builder: (context) => Add()));
+                      // Constants.prefs.setBool(AppStrings.isLoggedIn, false);
+                      Navigator.pushAndRemoveUntil(context,
+                          MaterialPageRoute(builder: (context) {
+                        return const Start();
+                      }), (route) => false);
                     },
                     style: ElevatedButton.styleFrom(
                       foregroundColor: Colors.black,
-                      backgroundColor: Colors.transparent, // Inner color transparent
+                      backgroundColor:
+                          Colors.transparent, // Inner color transparent
                       elevation: 0, // Remove elevation shadow
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20),
-                        side: BorderSide(color:  Color(0xFF665CF5), width: 2), // Outer line in blue color
+                        side: BorderSide(
+                            color: Color(0xFF665CF5),
+                            width: 2), // Outer line in blue color
                       ),
                     ),
                     child: Text(
                       'Logout',
                       style: TextStyle(
-                        color: Colors.black, // Text color to match the border, if desired
+                        color: Colors
+                            .black, // Text color to match the border, if desired
                         fontSize: 18,
                         fontWeight: FontWeight.w600,
                       ),
@@ -473,8 +540,8 @@ class Account extends StatelessWidget {
       ),
     );
   }
-
 }
+
 Widget bottomSheet() {
   return SingleChildScrollView(
     child: Container(
@@ -496,7 +563,8 @@ Widget bottomSheet() {
           ),
           SizedBox(height: 20),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly, // To space out the icons
+            mainAxisAlignment:
+                MainAxisAlignment.spaceEvenly, // To space out the icons
             children: [
               Column(
                 children: [
@@ -545,10 +613,10 @@ Widget imageProfile(BuildContext context) {
           right: 20,
           child: InkWell(
             onTap: () {
-             // showModalBottomSheet(
-             //   context: context,
-             //   builder: (builder) => bottomSheet(),
-             // );
+              // showModalBottomSheet(
+              //   context: context,
+              //   builder: (builder) => bottomSheet(),
+              // );
             },
             child: Icon(
               Icons.camera_alt,

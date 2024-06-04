@@ -36,7 +36,7 @@ class _ShopState extends State<Shop> {
         title: "teri maa ki chut",
         theme: ThemeData.dark(),
         // initialRoute: Start.routeName,
-        home: const Add(), // Set Start as the home screen
+        home: const Start(), // Set Start as the home screen
       ),
     );
   }
