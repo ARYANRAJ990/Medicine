@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medicine/Signup.dart';
 import 'package:medicine/auth_view_model.dart';
 import 'package:medicine/snackbar.dart';
 import 'package:provider/provider.dart';
@@ -93,7 +94,7 @@ class _StartState extends State<Start> {
                             keyboardType: TextInputType.emailAddress,
                             controller: authVM.emailText,
                             decoration: InputDecoration(
-                              hintText: 'Aryaraj@45465',
+                              hintText: 'Email',
                               alignLabelWithHint: true,
                               labelText: 'Email',
                               labelStyle: TextStyle(
@@ -324,10 +325,10 @@ class _StartState extends State<Start> {
                   ),
                   TextButton(
                     onPressed: () {
-                      //  Navigator.push(
-                      //    context,
-                      //    MaterialPageRoute(builder: (context) => const signup()),
-                      // );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const signup()),
+                       );
                     },
                     child: Text(
                       'Sign Up',
