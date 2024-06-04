@@ -312,6 +312,27 @@ class _StartState extends State<Start> {
                   ),
                 ],
               ),
+              SizedBox(
+                height: 12,
+              ),
+              ElevatedButton(
+                onPressed: () {},
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 12.0), // Adjust padding as needed
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Image.asset(
+                      'images/googler.png', // Make sure to add your Google logo image in the assets folder
+                      height: 24.0, // Adjust the height as needed
+                    ),
+                    SizedBox(width: 8.0), // Adjust the space between the image and text
+                    Text('Continue with Google'),
+                  ],
+                ),
+              ),
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
