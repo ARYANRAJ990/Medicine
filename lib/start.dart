@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:medicine/Signup.dart';
@@ -8,6 +7,8 @@ import 'package:medicine/snackbar.dart';
 import 'package:provider/provider.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:get/get.dart';
+
 
 class Start extends StatefulWidget {
   static const String routeName = '/start';
@@ -23,6 +24,7 @@ class _StartState extends State<Start> {
   late StreamSubscription subscription;
   bool isDeviceConnected = false;
   bool isAlertSet = false;
+
 
   getConnectivity() =>
       subscription = Connectivity().onConnectivityChanged.listen(
