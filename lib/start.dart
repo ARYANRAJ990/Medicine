@@ -3,6 +3,7 @@ import 'package:medicine/Signup.dart';
 import 'package:medicine/auth_view_model.dart';
 import 'package:medicine/snackbar.dart';
 import 'package:provider/provider.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
 
 class Start extends StatefulWidget {
   static const String routeName = '/start';
@@ -22,6 +23,35 @@ class _StartState extends State<Start> {
     final authVM = Provider.of<AuthViewModel>(context, listen: false);
     authVM.emailText.clear();
     authVM.passwordText.clear();
+    _checkInternetConnection();
+  }
+
+  Future<void> _checkInternetConnection() async {
+    bool isConnected = await InternetConnectionChecker().hasConnection;
+    if (!isConnected) {
+      _showInternetAlertDialog(context);
+    }
+  }
+
+  void _showInternetAlertDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('No Internet Connection'),
+          content: Text('Please check your internet connection and try again.'),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   bool _isEmailValid(String email) {
@@ -346,10 +376,10 @@ class _StartState extends State<Start> {
                   ),
                   TextButton(
                     onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => const signup()),
-                       );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => const Signup()),
+                      );
                     },
                     child: Text(
                       'Sign Up',

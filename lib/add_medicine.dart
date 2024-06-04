@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
@@ -11,12 +13,13 @@ class Medicine extends StatefulWidget {
 }
 
 class _MedicineState extends State<Medicine> {
+  final TextEditingController _searchController = TextEditingController();
   int selectedIndexRect = -1;
   int selectedIndexCircle = -1;
   int selectedSquareIndex = -1;
   int height = 180;
   double _counter = 0.0;
-  int index=1;
+  int index = 1;
 
   String selectedFrequency = "Everyday";
   String selectedTimesPerDay = "Once a day";
@@ -84,6 +87,56 @@ class _MedicineState extends State<Medicine> {
     });
   }
 
+  // Function to convert Medicine data to JSON format
+  Map<String, dynamic> _medicineToJson(
+    String searchValue,
+    /* Other parameters */
+  ) {
+    return {
+      'searchValue': searchValue,
+      // Add other parameters here...
+    };
+  }
+
+  // Function to store medicine data to Firebase
+  void _storeMedicineData() async {
+    try {
+      // Get the current user
+      User? user = FirebaseAuth.instance.currentUser;
+
+      // Check if the user is authenticated
+      if (user != null) {
+        // Extract data from UI
+        String searchValue = _searchController.text;
+        // Extract other data from UI...
+
+        // Convert data to JSON format
+        Map<String, dynamic> medicineJson =
+            _medicineToJson(searchValue /* Other parameters */);
+
+        // Get a reference to the user's node in the Firebase Realtime Database
+        DatabaseReference userRef =
+            FirebaseDatabase.instance.ref().child('users').child(user.uid);
+
+        // Generate a unique key for the medicine data
+        String medicineKey = userRef.child('medicines').push().key ?? '';
+
+        // Store the medicine data under the user's UID
+        await userRef.child('medicines').child(medicineKey).set(medicineJson);
+
+        // Show success message to the user
+        showSnackBar(context: context, message: "Medicine added successfully!");
+      } else {
+        // Show error message if user is not authenticated
+        showSnackBar(context: context, message: "User is not authenticated.");
+      }
+    } catch (e) {
+      // Show error message if there's an error storing medicine data
+      showSnackBar(
+          context: context, message: "Error storing medicine data: $e");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -119,19 +172,22 @@ class _MedicineState extends State<Medicine> {
                       fontWeight: FontWeight.normal,
                     ),
                     decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.symmetric(vertical: 15.0),
+                      contentPadding:
+                          const EdgeInsets.symmetric(vertical: 15.0),
                       focusedBorder: OutlineInputBorder(
                         borderSide: const BorderSide(color: Color(0xFF665CF5)),
                         borderRadius: BorderRadius.circular(18),
                       ),
-                      prefixIcon: const Icon(Icons.search, color: Color(0xFFABABAB)),
+                      prefixIcon:
+                          const Icon(Icons.search, color: Color(0xFFABABAB)),
                       hintText: 'Search Medicine Name',
                       hintStyle: const TextStyle(
                         color: Color(0xFFABABAB),
                         fontSize: 16,
                         fontWeight: FontWeight.normal,
                       ),
-                      suffixIcon: const Icon(Icons.mic, color: Color(0xFFABABAB)),
+                      suffixIcon:
+                          const Icon(Icons.mic, color: Color(0xFFABABAB)),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(18),
                         borderSide: const BorderSide(color: Color(0xFFF7F7F7)),
@@ -172,7 +228,9 @@ class _MedicineState extends State<Medicine> {
                         height: 50,
                         width: 50,
                         decoration: BoxDecoration(
-                          color: selectedIndexRect == index ? const Color(0xFFe9e7fd) : Colors.white70,
+                          color: selectedIndexRect == index
+                              ? const Color(0xFFe9e7fd)
+                              : Colors.white70,
                           border: Border.all(color: Colors.black),
                           borderRadius: BorderRadius.circular(8.0),
                         ),
@@ -459,7 +517,8 @@ class _MedicineState extends State<Medicine> {
                 child: DropdownButton<String>(
                   isExpanded: true,
                   value: selectedFrequency,
-                  icon: const Icon(Icons.keyboard_arrow_down, color: Colors.black),
+                  icon: const Icon(Icons.keyboard_arrow_down,
+                      color: Colors.black),
                   borderRadius: BorderRadius.circular(7),
                   dropdownColor: Colors.grey[200],
                   underline: Container(),
@@ -511,7 +570,8 @@ class _MedicineState extends State<Medicine> {
                 child: DropdownButton<String>(
                   isExpanded: true,
                   value: selectedTimesPerDay,
-                  icon: const Icon(Icons.keyboard_arrow_down, color: Colors.black),
+                  icon: const Icon(Icons.keyboard_arrow_down,
+                      color: Colors.black),
                   borderRadius: BorderRadius.circular(7),
                   dropdownColor: Colors.grey[200],
                   underline: Container(),
@@ -547,7 +607,8 @@ class _MedicineState extends State<Medicine> {
                 decoration: BoxDecoration(
                   color: Colors.white,
                   border: Border(
-                    bottom: BorderSide(color: Colors.black, width: 4.0), // Black bottom border
+                    bottom: BorderSide(
+                        color: Colors.black, width: 4.0), // Black bottom border
                   ),
                   borderRadius: BorderRadius.circular(7),
                 ),
@@ -555,14 +616,16 @@ class _MedicineState extends State<Medicine> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(left: 12.0),
-                      child: Icon(Icons.access_time, color: Colors.black), // Prefix Icon
+                      child: Icon(Icons.access_time,
+                          color: Colors.black), // Prefix Icon
                     ),
                     Expanded(
                       child: DropdownButtonHideUnderline(
                         child: DropdownButton<String>(
                           isExpanded: true,
                           value: selectedTimesPerDayy,
-                          icon: const Icon(Icons.keyboard_arrow_right, color: Colors.black),
+                          icon: const Icon(Icons.keyboard_arrow_right,
+                              color: Colors.black),
                           borderRadius: BorderRadius.circular(7),
                           dropdownColor: Colors.grey[200],
                           items: timesPerDayy.map((String time) {
@@ -600,7 +663,9 @@ class _MedicineState extends State<Medicine> {
               },
               child: Container(
                 decoration: BoxDecoration(
-                  color: selectedSquareIndex == index ? Colors.black : Colors.white,
+                  color: selectedSquareIndex == index
+                      ? Colors.black
+                      : Colors.white,
                   borderRadius: BorderRadius.circular(8.0),
                 ),
                 child: Row(
@@ -671,9 +736,10 @@ class _MedicineState extends State<Medicine> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 35.0,left: 20,right: 20,bottom: 38),
+              padding: const EdgeInsets.only(
+                  top: 35.0, left: 20, right: 20, bottom: 38),
               child: SizedBox(
-                width: MediaQuery.of(context).size.width,
+                  width: MediaQuery.of(context).size.width,
                   height: 50,
                   child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
@@ -684,10 +750,17 @@ class _MedicineState extends State<Medicine> {
                           borderRadius: BorderRadius.circular(50),
                         ),
                       ),
-                      onPressed: (){
-                        showSnackBar(context: context, message: "medicine added");
-                        },
-                      child: Text('Add',style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold,color: Colors.white),))),
+                      onPressed: () {
+                        showSnackBar(
+                            context: context, message: "medicine added");
+                      },
+                      child: Text(
+                        'Add',
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
+                      ))),
             )
           ],
         ),
