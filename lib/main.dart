@@ -33,7 +33,7 @@ class _ShopState extends State<Shop> {
       providers: providers,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: "teri maa ki chut",
+        title: "Medicine Alarm",
         theme: ThemeData.dark(),
         // initialRoute: Start.routeName,
         home: const Start(), // Set Start as the home screen

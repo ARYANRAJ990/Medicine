@@ -350,14 +350,15 @@ class _StartState extends State<Start> {
                     ),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Image.asset(
-                          'images/icon.png', // Make sure to add your Google logo image in the assets folder
+                          'images/finalbg.png', // Make sure to add your Google logo image in the assets folder
                           height: 24.0, // Adjust the height as needed
                         ),
                         SizedBox(
                             width:
-                                8.0), // Adjust the space between the image and text
+                                15.0), // Adjust the space between the image and text
                         Text(
                           'Continue with Google',
                           style: TextStyle(
